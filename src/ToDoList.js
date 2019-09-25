@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import TodoItems from "./TodoItems";
 
 class ToDoList extends Component {
     constructor(props) {
@@ -12,7 +13,24 @@ class ToDoList extends Component {
     }
 
     addItem(e) {
+        if (this._inputElement.value !== "") {
+            var newItem = {
+                text: this._inputElement.value,
+                key: Date.now()
+            };
 
+            this.setState((prevState) => {
+                return {
+                    items: prevState.items.concat(newItem)
+                };
+            });
+
+            this._inputElement.value = "";
+        }
+
+        console.log(this.state.items);
+
+        e.preventDefault(); //removing input element without clearing it from data
     }
 
     render() {
@@ -20,10 +38,11 @@ class ToDoList extends Component {
             <div className="todoListMain">
                 <div className="header">
                     <form onSubmit={this.addItem}>
-                        <input placeholder="enter task"></input>
+                        <input ref={(a) => this._inputElement = a} placeholder="enter task"></input>
                         <button type="submit">add</button>
                     </form>
                 </div>
+                <TodoItems entries={this.state.items}/>
             </div>
         );
     }
