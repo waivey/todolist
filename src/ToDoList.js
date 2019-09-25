@@ -11,7 +11,7 @@ class ToDoList extends Component {
         };
 
         this.addItem = this.addItem.bind(this);
-        this.deleteItem = this.deleteItem.bing(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     addItem(e) {
@@ -54,8 +54,8 @@ class ToDoList extends Component {
                         <button type="submit">add</button>
                     </form>
                 </div>
-                <TodoItems entries={this.state.items}
-                            delete={this.deleteItems}/>
+                <TodoItems entries={this.state.items} 
+                            delete={this.deleteItem}/>
             </div>
         );
     }
